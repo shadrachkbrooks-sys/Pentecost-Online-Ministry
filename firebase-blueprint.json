@@ -1,0 +1,180 @@
+{
+  "entities": {
+    "Lesson": {
+      "title": "Lesson",
+      "description": "Weekly bible teaching lesson published by the administration",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "keyScripture": { "type": "string" },
+        "introduction": { "type": "string" },
+        "mainPoints": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "heading": { "type": "string" },
+              "verses": { "type": "string" },
+              "content": { "type": "string" }
+            },
+            "required": ["heading", "verses", "content"]
+          }
+        },
+        "discussionQuestions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "reflection": { "type": "string" },
+        "closingPrayer": { "type": "string" },
+        "publishDate": { "type": "string" },
+        "status": { "type": "string", "enum": ["published", "draft"] },
+        "topic": { "type": "string" },
+        "themeNotes": { "type": "string" }
+      },
+      "required": ["id", "title", "keyScripture", "introduction", "publishDate", "status"]
+    },
+    "VideoContent": {
+      "title": "VideoContent",
+      "description": "Livestream record or sermon uploaded to the media page",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "youtubeId": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string", "enum": ["teaching", "prayer", "worship"] },
+        "description": { "type": "string" },
+        "addedAt": { "type": "string" }
+      },
+      "required": ["id", "youtubeId", "title", "category", "addedAt"]
+    },
+    "AnnouncementItem": {
+      "title": "AnnouncementItem",
+      "description": "Church bulletin announcement or event banner details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "image": { "type": "string" },
+        "date": { "type": "string" },
+        "description": { "type": "string" },
+        "type": { "type": "string", "enum": ["event", "conference", "crusade", "prayer_meeting", "bible_study", "news"] }
+      },
+      "required": ["id", "title", "date", "description", "type"]
+    },
+    "PrayerRequest": {
+      "title": "PrayerRequest",
+      "description": "Counselling/prayer petition submitted by a seeker",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "type": { "type": "string", "enum": ["prayer", "counseling"] },
+        "category": { "type": "string" },
+        "requestText": { "type": "string" },
+        "contactNumber": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "resolved"] }
+      },
+      "required": ["id", "name", "type", "requestText", "createdAt", "status"]
+    },
+    "SupporterProfile": {
+      "title": "SupporterProfile",
+      "description": "Custom verified profile of a believer or admin",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "isAdmin": { "type": "boolean" },
+        "savedVerseBookmarks": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "savedNotes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "verseRef": { "type": "string" },
+              "noteText": { "type": "string" },
+              "savedAt": { "type": "string" }
+            },
+            "required": ["id", "verseRef", "noteText", "savedAt"]
+          }
+        },
+        "likedVideos": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "bookmarkedVideos": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["uid", "email"]
+    },
+    "GlobalSettings": {
+      "title": "GlobalSettings",
+      "description": "Church metadata, application texts and theme color styles managed securely by administrators",
+      "type": "object",
+      "properties": {
+        "pastorWhatsapp": { "type": "string" },
+        "apostleWhatsapp": { "type": "string" },
+        "paypalEmail": { "type": "string" },
+        "mobileMoneyDetail": { "type": "string" },
+        "bankAccountDetail": { "type": "string" },
+        "adminPassphraseAdminHashed": { "type": "string" },
+        "topBarText": { "type": "string" },
+        "topBarDate": { "type": "string" },
+        "headerTitle": { "type": "string" },
+        "headerSubtitle": { "type": "string" },
+        "splashSlogan": { "type": "string" },
+        "lessonsHeroTitle": { "type": "string" },
+        "lessonsHeroVerse": { "type": "string" },
+        "lessonsHeroParagraph": { "type": "string" },
+        "topBarBgColor": { "type": "string" },
+        "topBarTextColor": { "type": "string" },
+        "headerBgColor": { "type": "string" },
+        "headerTitleColor": { "type": "string" },
+        "headerSubtitleColor": { "type": "string" },
+        "lessonsHeroBgColor": { "type": "string" },
+        "lessonsHeroTextColor": { "type": "string" },
+        "primaryBrandColor": { "type": "string" },
+        "donationGoalName": { "type": "string" },
+        "donationGoalTarget": { "type": "number" },
+        "donationGoalCollected": { "type": "number" },
+        "donationGoalCurrency": { "type": "string" }
+      },
+      "required": ["pastorWhatsapp", "apostleWhatsapp", "topBarText", "topBarBgColor"]
+    }
+  },
+  "firestore": {
+    "lessons/{lessonId}": {
+      "schema": "Lesson",
+      "description": "Weekly lesson database"
+    },
+    "videos/{videoId}": {
+      "schema": "VideoContent",
+      "description": "Sermons and streaming links database"
+    },
+    "announcements/{announcementId}": {
+      "schema": "AnnouncementItem",
+      "description": "National and district church announcements"
+    },
+    "prayer_requests/{requestId}": {
+      "schema": "PrayerRequest",
+      "description": "Confidential counseling and direct prayer petitions"
+    },
+    "supporters/{supporterId}": {
+      "schema": "SupporterProfile",
+      "description": "Registered supporters and administrators profiles list"
+    },
+    "settings/{settingsId}": {
+      "schema": "GlobalSettings",
+      "description": "Dynamic web application style templates and national coordinates database"
+    }
+  }
+}

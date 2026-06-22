@@ -1,0 +1,6 @@
+{
+  "name": "The Church of Pentecost – Liberia",
+  "description": "Official Bible Study, Worship & Discipleship Platform for The Church of Pentecost – Liberia. Features daily lessons, complete Bible study, worship music, prayer rooms, announcements, and supporting ministry growth.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

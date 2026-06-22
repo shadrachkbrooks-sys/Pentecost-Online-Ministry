@@ -1,0 +1,69 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Global safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper checking if document ID is valid (only letters, numbers, dash, underscore)
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Probe collection used in utils to check connection availability
+    match /probe/{docId} {
+      allow read, write: if true;
+    }
+
+    // Lessons path
+    match /lessons/{lessonId} {
+      allow read: if true;
+      allow write: if isValidId(lessonId) 
+                     && request.resource.data.id == lessonId 
+                     && request.resource.data.title is string 
+                     && request.resource.data.title.size() <= 200;
+    }
+
+    // Videos path
+    match /videos/{videoId} {
+      allow read: if true;
+      allow write: if isValidId(videoId) 
+                     && request.resource.data.id == videoId 
+                     && request.resource.data.title is string 
+                     && request.resource.data.title.size() <= 200;
+    }
+
+    // Announcements path
+    match /announcements/{announcementId} {
+      allow read: if true;
+      allow write: if isValidId(announcementId) 
+                     && request.resource.data.id == announcementId 
+                     && request.resource.data.title is string 
+                     && request.resource.data.title.size() <= 200;
+    }
+
+    // Prayer requests path
+    match /prayer_requests/{requestId} {
+      allow read, write: if isValidId(requestId) 
+                     && request.resource.data.id == requestId 
+                     && request.resource.data.name is string 
+                     && request.resource.data.name.size() <= 200;
+    }
+
+    // Supporters path
+    match /supporters/{supporterId} {
+      allow read, write: if isValidId(supporterId) 
+                     && request.resource.data.uid == supporterId 
+                     && request.resource.data.email is string 
+                     && request.resource.data.email.size() <= 200;
+    }
+
+    // App global settings parameters & styles
+    match /settings/{settingsId} {
+      allow read: if true;
+      allow write: if settingsId == 'global';
+    }
+  }
+}

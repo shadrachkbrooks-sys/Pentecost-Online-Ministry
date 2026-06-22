@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, Cambria, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-brand-blue: #003366;
+  --color-brand-gold: #D4AF37;
+  --color-brand-bg: #f8f9fa;
+  
+  /* Primary blue color transitions matching Clean Minimalism's deep navy blue */
+  --color-blue-50: #f0f4f8;
+  --color-blue-100: #d9e2ec;
+  --color-blue-250: #b9d1eb;
+  --color-blue-200: #bcccdc;
+  --color-blue-300: #9fb3c8;
+  --color-blue-400: #829ab1;
+  --color-blue-500: #627d98;
+  --color-blue-600: #486581;
+  --color-blue-700: #334e68;
+  --color-blue-800: #102a43;
+  --color-blue-850: #0c2033;
+  --color-blue-900: #003366;
+  --color-blue-950: #001f3f;
+  
+  --color-indigo-50: #f0f4f8;
+  --color-indigo-100: #d9e2ec;
+  --color-indigo-950: #001a35;
+  
+  /* Gold color accents matching #D4AF37 */
+  --color-yellow-50: #fbf9f2;
+  --color-yellow-100: #f5eed3;
+  --color-yellow-200: #ebe0b5;
+  --color-yellow-300: #e2c050;
+  --color-yellow-400: #D4AF37;
+  --color-yellow-500: #D4AF37;
+  --color-yellow-600: #bfa032;
+  --color-yellow-700: #a18524;
+  --color-yellow-800: #826a1b;
+  --color-yellow-950: #3b300a;
+  
+  /* Clean minimalist canvas and layout details */
+  --color-slate-50: #f8f9fa;
+  --color-slate-100: #f1f3f5;
+  --color-slate-200: #e9ecef;
+  --color-slate-350: #dee2e6;
+  --color-slate-600: #495057;
+  --color-slate-705: #343a40;
+  --color-slate-850: #212529;
+  --color-slate-900: #121620;
+  --color-slate-950: #060b13;
+}
+
+body {
+  background-color: #fdfcf7; /* Premium classic warm alabaster cream */
+  color: #1c2024;
+  font-family: "Inter", sans-serif;
+  margin: 0;
+}
+
+/* Elegant display headings and editorial titles */
+h1, h2, h3, h4, .font-serif {
+  font-family: "Playfair Display", Georgia, Cambria, serif;
+  letter-spacing: -0.015em;
+}
+
+blockquote {
+  font-family: "Playfair Display", Georgia, Cambria, serif;
+}
+
+code, pre, .font-mono {
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* Custom visual elements of Clean Minimalism */
+.card-minimal {
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-minimal:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
